@@ -5,6 +5,11 @@ pipeline {
             steps {
                 echo "Commit stage"
             }
-        }    
+        }
+        stage('Acceptance') {
+            steps {
+                echo "Acceptance stage"
+            }
+        }
     }
 }

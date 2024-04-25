@@ -11,6 +11,7 @@ pipeline {
             filename 'Dockerfile.build'
             args '-e DOCKER_CONFIG=./docker'
         }
+    }
     stages {
         stage('Commit') {
             steps {

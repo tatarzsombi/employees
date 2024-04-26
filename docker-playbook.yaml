@@ -39,7 +39,7 @@
         group: ubuntu
         mode: u=rwx,g=r,o=r
       loop:
-        - /docker-c.ompose.yaml
+        - /docker-compose.yaml
         - ./wait
     - name: Create and start services
       community.docker.docker_compose:

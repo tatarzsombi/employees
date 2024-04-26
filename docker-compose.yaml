@@ -13,8 +13,10 @@ services:
     ports:
       - 3306:3306
 
-  employees-app:
-    image: tatarzsombi/employees:1.0.0
+
+employees-app:
+    image: ${IMAGE_NAME:-tatarzsombi/employees:latest}
+    #image: tatarzsombi/employees:1.0.0
     depends_on:
       - mariadb
     expose:
@@ -27,6 +29,7 @@ services:
       BPL_JVM_THREAD_COUNT: 100
     volumes:
     - ./wait:/opt/wait
-    entrypoint: ["/opt/wait/wait-for-it.sh", "-t", "120", "mariadb:3306", "--", "/cnb/process/web"]
+    entrypoint: ["/opt/wait/wait-for-it.sh", "-t", "120", "mariadb:3306", "--", "java", "org.springframework.boot.loader.JarLauncher"]
+    #entrypoint: ["/opt/wait/wait-for-it.sh", "-t", "120", "mariadb:3306", "--", "/cnb/process/web"]
     ports:
       - ${SERVER_PORT:-8080}:8080

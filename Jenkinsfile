@@ -34,5 +34,14 @@ pipeline {
                 sh "docker push tatarzsombi/employees:latest"                
             }
         }
+
+        stage('E2E') {            
+            steps {
+                dir('employees-postman') {
+                    sh 'docker compose -f docker-compose.yaml -f docker-compose.jenkins.yaml up --abort-on-container-exit'                    
+                }
+            }
+
+        }
     }
 }

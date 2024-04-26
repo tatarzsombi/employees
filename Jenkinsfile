@@ -37,12 +37,14 @@ pipeline {
 
         stage('E2E') {            
             steps {
-                sh 'rm -rf reports'
-                sh 'mkdir reports'
+                
                 dir('employees-postman') {
+                    sh 'rm -rf reports'
+                    sh 'mkdir reports'
                     sh 'docker compose -f docker-compose.yaml -f docker-compose.jenkins.yaml up --abort-on-container-exit'                    
+                    archiveArtifacts artifacts: 'reports/*.html', fingerprint: true
                 }
-                archiveArtifacts artifacts: 'reports/*.html', fingerprint: true
+                
             }
 
         }

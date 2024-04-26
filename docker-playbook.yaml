@@ -39,12 +39,11 @@
         group: ubuntu
         mode: u=rwx,g=r,o=r
       loop:
-        - ./docker-compose.yaml
+        - /docker-c.ompose.yaml
         - ./wait
     - name: Create and start services
       community.docker.docker_compose:
         project_src: employees
-      register: output
       environment:
         SERVER_PORT: 80
         IMAGE_NAME: "{{ imageName | default('tatarzsombi/employees:latest') }}"
